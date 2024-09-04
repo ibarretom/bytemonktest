@@ -6,9 +6,9 @@ import java.util.Objects;
 
 @Getter
 public abstract class Entity {
-    protected long id;
+    protected Long id;
 
-    public Entity(long id) {
+    public Entity(Long id) {
         this.id = id;
     }
 
@@ -19,7 +19,7 @@ public abstract class Entity {
         }
 
         Entity otherEntity = (Entity) other;
-        return this.id == otherEntity.getId();
+        return Objects.equals(this.id, otherEntity.getId());
     }
 
     @Override
