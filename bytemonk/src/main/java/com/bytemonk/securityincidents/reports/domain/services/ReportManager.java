@@ -3,7 +3,7 @@ package com.bytemonk.securityincidents.reports.domain.services;
 import com.bytemonk.securityincidents.abstractions.domain.exceptions.DomainException;
 import com.bytemonk.securityincidents.reports.IIncidentReportRepository;
 import com.bytemonk.securityincidents.reports.domain.entities.Incident;
-import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
+import com.bytemonk.securityincidents.users.domain.entities.User;
 
 public class ReportManager implements IReportManager {
     private final IIncidentReportRepository incidentReportRepository;
@@ -12,13 +12,13 @@ public class ReportManager implements IReportManager {
         this.incidentReportRepository = incidentReportRepository;
     }
 
-    public Incident warnSecurityBreach(Incident aIncident, Username username) throws DomainException {
-        var aFetchedIncident = incidentReportRepository.findBy(aIncident.getTitle(), username);
+    public Incident warnSecurityBreach(Incident aIncident, User user) throws DomainException {
+        var aFetchedIncident = incidentReportRepository.findBy(aIncident.getTitle(), user.getUsername());
 
         if (aFetchedIncident != null) {
             throw new DomainException("Report already made.");
         }
 
-        return incidentReportRepository.save(aIncident, username);
+        return incidentReportRepository.save(aIncident, user);
     }
 }

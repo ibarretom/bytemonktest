@@ -8,7 +8,7 @@ import com.bytemonk.securityincidents.reports.domain.valueobjects.Description;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.ESecurityLevel;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.HappenedAt;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.Title;
-import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
+import com.bytemonk.securityincidents.users.domain.entities.User;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,11 +21,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ReportManagerTest {
     ReportManager reportManager;
     IncidentReportRepository repository;
-    Username username;
+    User anUser;
 
     @BeforeEach
     void init() {
-        this.username = new Username("batman");
+        anUser = User.create("Bruce", "Wayne", "thebatman", "wayneenterprises"); ;
         repository = new IncidentReportRepository();
         this.reportManager = new ReportManager(repository);
     }
@@ -40,7 +40,7 @@ public class ReportManagerTest {
 
         var aReport = Incident.create(aTitle, aDescriptionString, aDate, ESecurityLevel.MEDIUM);
 
-        var aIncident = reportManager.warnSecurityBreach(aReport, username);
+        var aIncident = reportManager.warnSecurityBreach(aReport, anUser);
 
         assertEquals(new Title(aTitle),  aIncident.getTitle());
         assertEquals(new Description(aDescriptionString), aIncident.getDescription());
@@ -53,7 +53,7 @@ public class ReportManagerTest {
         var aTitle = "Penguim just stole a password";
         var aDescriptionString = "One user left his browser open. What becomes a breach for the Penguim.";
 
-        repository.save(Incident.create(aTitle, aDescriptionString, DateFactory.now(), ESecurityLevel.LOW), username);
+        repository.save(Incident.create(aTitle, aDescriptionString, DateFactory.now(), ESecurityLevel.LOW), anUser);
 
         aDescriptionString = "The Penguim gather with Charede and broke a user account";
 
@@ -61,6 +61,6 @@ public class ReportManagerTest {
 
         var aReport = Incident.create(aTitle, aDescriptionString, aDate, ESecurityLevel.HIGH);
 
-        assertThrows(DomainException.class, () -> reportManager.warnSecurityBreach(aReport, username));
+        assertThrows(DomainException.class, () -> reportManager.warnSecurityBreach(aReport, anUser));
     }
 }
