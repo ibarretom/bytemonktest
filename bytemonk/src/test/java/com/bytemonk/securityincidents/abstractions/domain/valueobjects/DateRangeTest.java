@@ -1,4 +1,4 @@
-package com.bytemonk.securityincidents.reports.valueobjects;
+package com.bytemonk.securityincidents.abstractions.domain.valueobjects;
 
 import com.bytemonk.securityincidents.abstractions.domain.exceptions.DomainException;
 import com.bytemonk.securityincidents.abstractions.domain.services.DateFactory;

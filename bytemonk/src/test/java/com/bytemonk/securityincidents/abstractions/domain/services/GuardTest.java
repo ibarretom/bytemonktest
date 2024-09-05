@@ -1,8 +1,6 @@
-package com.bytemonk.securityincidents.abstractions.services;
+package com.bytemonk.securityincidents.abstractions.domain.services;
 
 import com.bytemonk.securityincidents.abstractions.domain.exceptions.DomainException;
-import com.bytemonk.securityincidents.abstractions.domain.services.DateFactory;
-import com.bytemonk.securityincidents.abstractions.domain.services.Guard;
 import com.bytemonk.securityincidents.abstractions.valueobjects.DateRange;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

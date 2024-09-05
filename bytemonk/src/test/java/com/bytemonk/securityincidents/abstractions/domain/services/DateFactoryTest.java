@@ -1,6 +1,5 @@
-package com.bytemonk.securityincidents.abstractions.domain;
+package com.bytemonk.securityincidents.abstractions.domain.services;
 
-import com.bytemonk.securityincidents.abstractions.domain.services.DateFactory;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.context.SpringBootTest;
