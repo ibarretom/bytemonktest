@@ -23,8 +23,8 @@ public class DescriptionTest {
 
     @ParameterizedTest
     @MethodSource("invalidEmptyFieldsProvider")
-    void should_reject_empty_description(String aInvalidDescription) {
-        assertThrows(DomainException.class, () -> new Description(aInvalidDescription));
+    void should_reject_empty_description(String anInvalidDescription) {
+        assertThrows(DomainException.class, () -> new Description(anInvalidDescription));
     }
 
     private static Stream<String> invalidEmptyFieldsProvider() {
