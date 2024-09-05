@@ -1,13 +1,11 @@
 package com.bytemonk.securityincidents.users.domain;
-
-import com.bytemonk.securityincidents.users.entities.User;
-import com.bytemonk.securityincidents.users.valueobjects.Name;
-import com.bytemonk.securityincidents.users.valueobjects.Password;
-import com.bytemonk.securityincidents.users.valueobjects.Username;
+import com.bytemonk.securityincidents.users.domain.entities.User;
+import com.bytemonk.securityincidents.users.domain.valueobjects.Name;
+import com.bytemonk.securityincidents.users.domain.valueobjects.Password;
+import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserTest {
     @Test
@@ -25,4 +23,5 @@ public class UserTest {
         assertEquals(new Username("thechosen"), aUser.getUsername());
         assertEquals(new Password("hobbit"), aUser.getPassword());
     }
+
 }

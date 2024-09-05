@@ -1,6 +1,7 @@
 package com.bytemonk.securityincidents.users.valueobjects;
 
 import com.bytemonk.securityincidents.abstractions.domain.exceptions.DomainException;
+import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;

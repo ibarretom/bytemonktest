@@ -1,9 +1,9 @@
-package com.bytemonk.securityincidents.users.entities;
+package com.bytemonk.securityincidents.users.domain.entities;
 
 import com.bytemonk.securityincidents.abstractions.domain.AggregateRoot;
-import com.bytemonk.securityincidents.users.valueobjects.Name;
-import com.bytemonk.securityincidents.users.valueobjects.Password;
-import com.bytemonk.securityincidents.users.valueobjects.Username;
+import com.bytemonk.securityincidents.users.domain.valueobjects.Name;
+import com.bytemonk.securityincidents.users.domain.valueobjects.Password;
+import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,4 +1,4 @@
-package com.bytemonk.securityincidents.users.valueobjects;
+package com.bytemonk.securityincidents.users.domain.valueobjects;
 
 import com.bytemonk.securityincidents.abstractions.domain.services.Guard;
 import lombok.SneakyThrows;
