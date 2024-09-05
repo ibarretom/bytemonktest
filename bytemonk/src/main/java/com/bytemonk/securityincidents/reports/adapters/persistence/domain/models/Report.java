@@ -5,12 +5,10 @@ import com.bytemonk.securityincidents.reports.domain.valueobjects.Description;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.ESecurityLevel;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.HappenedAt;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.Title;
-import com.bytemonk.securityincidents.users.domain.entities.User;
 import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
 import lombok.Getter;
 
 import java.util.Date;
-import java.util.Random;
 
 @Getter
 public class Report {
