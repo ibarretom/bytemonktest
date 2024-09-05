@@ -10,10 +10,10 @@ import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IncidentReportRepository implements IIncidentReportRepository {
+public class IncidentReportRepositoryTest implements IIncidentReportRepository {
     private final List<Report> reports;
 
-    public IncidentReportRepository() {
+    public IncidentReportRepositoryTest() {
         reports = new ArrayList<Report>();
     }
 
