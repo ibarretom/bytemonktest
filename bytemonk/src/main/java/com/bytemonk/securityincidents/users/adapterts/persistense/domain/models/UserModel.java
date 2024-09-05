@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
-@Table(name="users")
+@Table(name="users", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 @Getter
 public class UserModel {
 
