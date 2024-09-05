@@ -2,7 +2,7 @@ package com.bytemonk.securityincidents.reports.domain.services;
 
 import com.bytemonk.securityincidents.abstractions.domain.exceptions.DomainException;
 import com.bytemonk.securityincidents.abstractions.domain.services.DateFactory;
-import com.bytemonk.securityincidents.reports.adapters.persistence.database.IncidentReportRepository;
+import com.bytemonk.securityincidents.reports.adapters.persistence.database.IncidentReportRepositoryTest;
 import com.bytemonk.securityincidents.reports.domain.entities.Incident;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.Description;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.ESecurityLevel;
@@ -20,13 +20,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @SpringBootTest
 public class ReportManagerTest {
     ReportManager reportManager;
-    IncidentReportRepository repository;
+    IncidentReportRepositoryTest repository;
     User anUser;
 
     @BeforeEach
     void init() {
         anUser = User.create("Bruce", "Wayne", "thebatman", "wayneenterprises"); ;
-        repository = new IncidentReportRepository();
+        repository = new IncidentReportRepositoryTest();
         this.reportManager = new ReportManager(repository);
     }
 
