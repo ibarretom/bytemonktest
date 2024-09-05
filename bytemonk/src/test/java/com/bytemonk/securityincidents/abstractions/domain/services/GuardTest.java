@@ -97,9 +97,11 @@ public class GuardTest {
 
     @Test
     void should_reject_a_date_outside_range() throws DomainException {
-        var aDate = DateFactory.add(DateFactory.now(), -3);
+        var now = DateFactory.now();
 
-        var aRange = new DateRange(DateFactory.add(aDate, -2), DateFactory.now());
+        var aDate = DateFactory.add(now, -3);
+
+        var aRange = new DateRange(DateFactory.add(aDate, -2), aDate);
 
         assertThrows(DomainException.class, () -> Guard.Against.OutsideLimit(DateFactory.now(), aRange));
     }

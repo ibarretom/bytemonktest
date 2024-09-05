@@ -4,8 +4,10 @@ import com.bytemonk.securityincidents.abstractions.domain.AggregateRoot;
 import com.bytemonk.securityincidents.users.domain.valueobjects.Name;
 import com.bytemonk.securityincidents.users.domain.valueobjects.Password;
 import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
+
 import lombok.Getter;
 import lombok.Setter;
+
 
 @Getter
 public class User extends AggregateRoot {

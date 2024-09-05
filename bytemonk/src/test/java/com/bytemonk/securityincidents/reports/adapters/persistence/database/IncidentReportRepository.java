@@ -4,6 +4,7 @@ import com.bytemonk.securityincidents.reports.IIncidentReportRepository;
 import com.bytemonk.securityincidents.reports.adapters.persistence.domain.models.Report;
 import com.bytemonk.securityincidents.reports.domain.entities.Incident;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.Title;
+import com.bytemonk.securityincidents.users.domain.entities.User;
 import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
 
 import java.util.ArrayList;
@@ -18,20 +19,21 @@ public class IncidentReportRepository implements IIncidentReportRepository {
 
     @Override
     public Incident findBy(Title aTitle, Username username) {
-        var aOptionalIncident = reports.stream().filter(report -> report.getTitle().equals(aTitle.value()) && report.getUsername().equals(username.value()))
+        var anIncident = reports.stream()
+                .filter(report -> report.getTitle().equals(aTitle.value()) && report.getOwner().equals(username))
                 .findFirst();
 
-        if (aOptionalIncident.isEmpty())
+        if (anIncident.isEmpty())
             return null;
 
-        var aReport = aOptionalIncident.get();
+        var aReport = anIncident.get();
 
         return Report.createDomain(aReport);
     }
 
     @Override
-    public Incident save(Incident aIncident, Username username) {
-        var aReport = Report.create(aIncident, username);
+    public Incident save(Incident aIncident, User user) {
+        var aReport = Report.create(aIncident, user);
 
         reports.add(aReport);
 
