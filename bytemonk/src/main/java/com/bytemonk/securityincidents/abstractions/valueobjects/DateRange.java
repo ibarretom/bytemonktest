@@ -18,19 +18,28 @@ public record DateRange(Date start, Date end) {
     }
 
     public boolean includes(Date aDate) {
-        return start.before(aDate) && end.after(aDate);
+        return !(isBeforeStart(aDate) || isAfterEnd(aDate));
+    }
+
+    private boolean isBeforeStart(Date aDate) {
+        return aDate.before(start) && !aDate.equals(start);
+    }
+
+    private boolean isAfterEnd(Date aDate) {
+        return aDate.after(end) && !aDate.equals(end);
     }
 
     public long getDays() {
+        return (long) Math.nextUp(getDiff() / getConversionFactor());
+    }
+
+    private double getConversionFactor() {
         var TO_DAYS = 24.0;
         var TO_HOURS = 60;
         var TO_MINUTES = 60;
         var TO_SECONDS = 1000;
 
-        var totalConversion = (TO_DAYS * TO_HOURS * TO_MINUTES * TO_SECONDS);
-
-        var diff = getDiff();
-        return (long) Math.nextUp((diff) / totalConversion);
+        return (TO_DAYS * TO_HOURS * TO_MINUTES * TO_SECONDS);
     }
 
     private long getDiff() {

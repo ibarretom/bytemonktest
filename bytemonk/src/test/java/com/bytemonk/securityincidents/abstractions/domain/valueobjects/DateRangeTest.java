@@ -88,4 +88,24 @@ public class DateRangeTest {
 
         assertEquals(2, new DateRange(aDayBefore, aDay).getDays());
     }
+
+    @Test
+    void should_be_in_range_a_date_that_starts_at_the_beginning_date() {
+        var aDay = DateFactory.now();
+        var aDayBefore = DateFactory.add(aDay, -2);
+
+        var aRange = new DateRange(aDayBefore, aDay);
+
+        assertTrue(aRange.includes(aDayBefore));
+    }
+
+    @Test
+    void should_be_in_range_a_date_that_it_is_at_the_end_date() {
+        var aDay = DateFactory.now();
+        var aDayBefore = DateFactory.add(aDay, -2);
+
+        var aRange = new DateRange(aDayBefore, aDay);
+
+        assertTrue(aRange.includes(aDay));
+    }
 }
