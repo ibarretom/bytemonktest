@@ -18,7 +18,7 @@ public class TitleTest {
     void should_allow_a_valid_title() {
         var aTitle = new Title("Sauron is back");
 
-        assertEquals("Sauron is back", aTitle.aValue());
+        assertEquals("Sauron is back", aTitle.value());
     }
 
     @ParameterizedTest
