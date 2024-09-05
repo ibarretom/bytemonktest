@@ -1,5 +1,7 @@
 package com.bytemonk.securityincidents.reports.domain.entities;
 
+import com.bytemonk.securityincidents.abstractions.domain.services.DateFactory;
+import com.bytemonk.securityincidents.abstractions.valueobjects.DateRange;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.Description;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.ESecurityLevel;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.HappenedAt;
@@ -19,6 +21,11 @@ public final class Incident extends Report {
         super(id, title, description);
         this.incidentDate = happenedAt;
         this.securityLevel = securityLevel;
+    }
+
+    public static DateRange getIncidentRangeLimit() {
+        var now = DateFactory.now();
+        return new DateRange(DateFactory.add(now, -Incident.LIMIT_IN_DAYS), now);
     }
 
     public static Incident create(String title, String description, Date incidentDate, ESecurityLevel securityLevel) {
