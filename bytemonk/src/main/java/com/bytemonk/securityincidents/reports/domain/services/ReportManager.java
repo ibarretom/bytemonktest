@@ -5,7 +5,7 @@ import com.bytemonk.securityincidents.reports.IIncidentReportRepository;
 import com.bytemonk.securityincidents.reports.domain.entities.Incident;
 import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
 
-public class ReportManager {
+public class ReportManager implements IReportManager {
     private final IIncidentReportRepository incidentReportRepository;
 
     public ReportManager(IIncidentReportRepository incidentReportRepository) {
