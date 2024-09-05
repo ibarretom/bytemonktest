@@ -1,7 +1,9 @@
 package com.bytemonk.securityincidents.abstractions.domain.services;
 
 import com.bytemonk.securityincidents.abstractions.domain.exceptions.DomainException;
+import com.bytemonk.securityincidents.abstractions.domain.exceptions.ValidationException;
 import com.bytemonk.securityincidents.abstractions.valueobjects.DateRange;
+import com.bytemonk.securityincidents.reports.domain.valueobjects.ESecurityLevel;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -100,6 +102,16 @@ public class GuardTest {
         var aRange = new DateRange(DateFactory.add(aDate, -2), DateFactory.now());
 
         assertThrows(DomainException.class, () -> Guard.Against.OutsideLimit(DateFactory.now(), aRange));
+    }
+
+    @Test
+    void should_return_the_value_when_is_in_enum_bounds() throws ValidationException {
+        assertEquals(ESecurityLevel.HIGH.toString(), Guard.Validate.UnBounded("HIGH", ESecurityLevel.class));
+    }
+
+    @Test
+    void should_throw_when_a_string_is_outside_enum_bounds() {
+        assertThrows(ValidationException.class, () -> Guard.Validate.UnBounded("ring", ESecurityLevel.class));
     }
 
 }

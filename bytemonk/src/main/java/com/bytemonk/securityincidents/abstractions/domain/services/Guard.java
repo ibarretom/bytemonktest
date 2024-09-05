@@ -1,6 +1,7 @@
 package com.bytemonk.securityincidents.abstractions.domain.services;
 
 import com.bytemonk.securityincidents.abstractions.domain.exceptions.DomainException;
+import com.bytemonk.securityincidents.abstractions.domain.exceptions.ValidationException;
 import com.bytemonk.securityincidents.abstractions.valueobjects.DateRange;
 
 import java.text.MessageFormat;
@@ -39,6 +40,42 @@ public class Guard {
                 throw new DomainException(MessageFormat.format(aMessage, aDateRange.getDays()));
             }
             return aDate;
+        }
+    }
+
+    public static class Validate {
+        public static String NullOrEmpty(String aValue) throws ValidationException {
+           try {
+               return Guard.Against.NullOrEmpty(aValue);
+           }catch(DomainException ex) {
+                throw new ValidationException("Value cannot be null or empty");
+           }
+        }
+
+        public static String SmallerThen(int aLength, String aValue) throws ValidationException {
+            try {
+                return Guard.Against.SmallerThen(aLength, aValue);
+            }catch(DomainException ex) {
+                throw new ValidationException("Value cannot be smaller then 100 characters");
+            }
+        }
+
+        public static <T extends Enum<T>> String UnBounded(String aValue, Class<T> enumType) {
+            try {
+                Enum.valueOf(enumType, aValue);
+
+                return aValue;
+            }catch (IllegalArgumentException ex) {
+                throw new ValidationException("The provided value must a valid ");
+            }
+        }
+
+        public static Date OutsideLimit(Date aDate, DateRange aDateRange) throws ValidationException {
+            try {
+                return Guard.Against.OutsideLimit(aDate, aDateRange);
+            }catch (DomainException ex) {
+                throw new ValidationException(MessageFormat.format("Date must be between {0} and {1}", aDateRange.start().toString(), aDateRange.end().toString()));
+            }
         }
     }
 }
