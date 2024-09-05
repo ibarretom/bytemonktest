@@ -7,7 +7,7 @@ public record Title(String value) {
 
     @SneakyThrows
     public Title {
-        int MAX_POSSIBLE_CHARS = 10;
-        Guard.Against.SmallerThen(MAX_POSSIBLE_CHARS, value);
+        int MIN_POSSIBLE_CHARS = 10;
+        Guard.Against.SmallerThen(MIN_POSSIBLE_CHARS, value);
     }
 }
