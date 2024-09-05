@@ -26,4 +26,8 @@ public final class Incident extends Report {
                                 new HappenedAt(incidentDate, -Incident.LIMIT_IN_DAYS),
                                 securityLevel);
     }
+
+    public static Incident create(Long id, Title aTitle, Description aDescription, HappenedAt aIncidentDate, ESecurityLevel aSecurityLevel) {
+        return new Incident(id, aTitle, aDescription, aIncidentDate, aSecurityLevel);
+    }
 }
