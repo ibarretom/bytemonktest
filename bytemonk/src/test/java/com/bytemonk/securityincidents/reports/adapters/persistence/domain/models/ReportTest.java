@@ -3,6 +3,7 @@ package com.bytemonk.securityincidents.reports.adapters.persistence.domain.model
 import com.bytemonk.securityincidents.abstractions.domain.services.DateFactory;
 import com.bytemonk.securityincidents.reports.domain.entities.Incident;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.ESecurityLevel;
+import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -19,11 +20,12 @@ public class ReportTest {
 
         var aIncident = Incident.create(aStringTitle, aDescriptionTitle, aDate, ESecurityLevel.HIGH);
 
-        var aPersistentReport = Report.create(aIncident);
+        var aPersistentReport = Report.create(aIncident, new Username("Dr. Dre"));
 
         assertEquals(aStringTitle, aPersistentReport.getTitle());
         assertEquals(aDescriptionTitle, aPersistentReport.getDescription());
         assertEquals(aDate, aPersistentReport.getIncidentDate());
         assertEquals("HIGH", aPersistentReport.getSeverity());
+        assertEquals("Dr. Dre", aPersistentReport.getUsername());
     }
 }
