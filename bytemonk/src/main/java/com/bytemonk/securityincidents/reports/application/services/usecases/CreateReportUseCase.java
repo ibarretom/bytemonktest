@@ -8,10 +8,14 @@ import com.bytemonk.securityincidents.reports.application.domain.valueobjects.Cr
 import com.bytemonk.securityincidents.reports.application.domain.valueobjects.CreateReportUseCaseRequest;
 import com.bytemonk.securityincidents.reports.application.domain.valueobjects.CreatedReportResponse;
 import com.bytemonk.securityincidents.reports.domain.services.IReportManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CreateReportUseCase extends UseCaseBase {
     private final IReportManager reportManager;
 
+    @Autowired
     public CreateReportUseCase(IReportManager reportManager) {
         this.reportManager = reportManager;
     }

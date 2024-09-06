@@ -4,10 +4,14 @@ import com.bytemonk.securityincidents.abstractions.domain.exceptions.DomainExcep
 import com.bytemonk.securityincidents.reports.IIncidentReportRepository;
 import com.bytemonk.securityincidents.reports.domain.entities.Incident;
 import com.bytemonk.securityincidents.users.domain.entities.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ReportManager implements IReportManager {
     private final IIncidentReportRepository incidentReportRepository;
 
+    @Autowired
     public ReportManager(IIncidentReportRepository incidentReportRepository) {
         this.incidentReportRepository = incidentReportRepository;
     }
