@@ -44,7 +44,7 @@ public class IncidentReportRepositoryTest implements IIncidentReportRepository {
     @Override
     public Incident findByIncidentId(Long id, Username anUsername) {
         var aReport = reports.stream()
-                .filter(report -> report.getId().equals(id) && report.getOwner().equals(anUsername))
+                .filter(report -> report.getId() != null && report.getId().equals(id) && report.getOwner().equals(anUsername))
                 .findFirst();
 
         return aReport.map(Report::createDomain).orElse(null);

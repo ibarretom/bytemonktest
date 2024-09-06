@@ -4,8 +4,12 @@ import com.bytemonk.securityincidents.abstractions.domain.exceptions.DomainExcep
 import com.bytemonk.securityincidents.reports.IIncidentReportRepository;
 import com.bytemonk.securityincidents.reports.domain.entities.Incident;
 import com.bytemonk.securityincidents.users.domain.entities.User;
+import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ReportManager implements IReportManager {
@@ -24,5 +28,16 @@ public class ReportManager implements IReportManager {
         }
 
         return incidentReportRepository.saveIncident(anIncident, anUser);
+    }
+
+    @Override
+    public List<Incident> findByIncidentId(long anId, Username anUsername) throws DomainException {
+        var anIncident = incidentReportRepository.findByIncidentId(anId, anUsername);
+
+        if (anIncident == null) {
+            return new ArrayList<Incident>();
+        }
+
+        return List.of(anIncident);
     }
 }

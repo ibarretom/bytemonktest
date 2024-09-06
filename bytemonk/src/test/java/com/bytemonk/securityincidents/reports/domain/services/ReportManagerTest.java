@@ -3,6 +3,7 @@ package com.bytemonk.securityincidents.reports.domain.services;
 import com.bytemonk.securityincidents.abstractions.domain.exceptions.DomainException;
 import com.bytemonk.securityincidents.abstractions.domain.services.DateFactory;
 import com.bytemonk.securityincidents.reports.adapters.persistence.database.IncidentReportRepositoryTest;
+import com.bytemonk.securityincidents.reports.adapters.persistence.domain.models.Report;
 import com.bytemonk.securityincidents.reports.domain.entities.Incident;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.Description;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.ESecurityLevel;
@@ -10,6 +11,7 @@ import com.bytemonk.securityincidents.reports.domain.valueobjects.HappenedAt;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.Title;
 import com.bytemonk.securityincidents.users.domain.entities.User;
 
+import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -62,5 +64,12 @@ public class ReportManagerTest {
         var aReport = Incident.create(aTitle, aDescriptionString, aDate, ESecurityLevel.HIGH);
 
         assertThrows(DomainException.class, () -> reportManager.warnSecurityBreach(aReport, anUser));
+    }
+
+    @Test
+    void should_return_a_empty_list_when_no_incident_is_fount() throws DomainException {
+        var anIncidentList = reportManager.findByIncidentId(12, new Username("batman"));
+
+        assertEquals(0, anIncidentList.size());
     }
 }
