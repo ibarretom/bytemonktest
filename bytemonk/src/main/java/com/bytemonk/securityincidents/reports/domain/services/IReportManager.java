@@ -5,5 +5,5 @@ import com.bytemonk.securityincidents.reports.domain.entities.Incident;
 import com.bytemonk.securityincidents.users.domain.entities.User;
 
 public interface IReportManager  {
-    public Incident warnSecurityBreach(Incident aIncident, User user) throws DomainException;
+    public Incident warnSecurityBreach(Incident anIncident, User anUser) throws DomainException;
 }
