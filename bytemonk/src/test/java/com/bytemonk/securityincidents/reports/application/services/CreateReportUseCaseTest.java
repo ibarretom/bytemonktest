@@ -22,6 +22,7 @@ public class CreateReportUseCaseTest {
     private User aUser;
     private ReportManager reportManager;
     CreateReportUseCase aUseCase;
+    
     @BeforeEach
     void init() {
         aUser = User.create("Berry", "Allen", "fastestmanalive", "zipzip");

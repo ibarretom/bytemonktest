@@ -49,10 +49,6 @@ public abstract sealed class ApplicationResponse<T> permits ApplicationSuccess, 
             return HttpStatus.CREATED;
         }
 
-        if (code.equals(EOperationCode.UPDATED)) {
-            return HttpStatus.OK;
-        }
-
         return HttpStatus.OK;
     }
 }

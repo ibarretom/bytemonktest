@@ -16,6 +16,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -115,5 +116,42 @@ public class ReportControllerIT {
                 )
                 .andDo(print())
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void should_retrieve_a_empty_list_when_has_no_reports() throws Exception {
+        var authorizationHeader = new HttpHeaders();
+        authorizationHeader.add("X-Authorization-Username", "gandalfthegrey");
+        authorizationHeader.add("X-Authorization-Password", "thewhite");
+
+        mockMvc
+                .perform(
+                        get("/report/10")
+                                .contentType("Application/json")
+                                .headers(authorizationHeader)
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.reports").isEmpty())
+                .andExpect(jsonPath("$.reports").isArray());
+    }
+
+    @Test
+    @Sql("/mockreport.sql")
+    void should_retrieve_a_report_by_its_id() throws Exception {
+        var authorizationHeader = new HttpHeaders();
+        authorizationHeader.add("X-Authorization-Username", "gandalfthegrey");
+        authorizationHeader.add("X-Authorization-Password", "thewhite");
+
+        mockMvc
+                .perform(
+                        get("/report/1")
+                                .contentType("Application/json")
+                                .headers(authorizationHeader)
+                )
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.reports").isNotEmpty())
+                .andExpect(jsonPath("$.reports").isArray());
     }
 }

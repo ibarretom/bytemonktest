@@ -40,6 +40,7 @@ public class ReportsRepository implements IIncidentReportRepository {
 
     @Override
     public Incident findByIncidentId(Long id, Username anUsername) {
+        var all = jpaRepository.findAll();
         var aReport = jpaRepository.findByIncidentId(id, anUsername.value());
 
         if (aReport == null) {

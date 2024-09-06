@@ -6,5 +6,6 @@ public enum EOperationCode {
     INTERNAL_ERROR,
     CREATED,
     DEFAULT_SUCCESS,
-    UPDATED
+    UPDATED,
+    FETCHED,
 }
