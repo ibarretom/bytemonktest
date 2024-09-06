@@ -51,8 +51,8 @@ public class Report {
     }
     public static Report create(Incident aIncident, User user) {
         return new Report(null, aIncident.getTitle().value(), aIncident.getDescription().value(),
-                          aIncident.getSecurityLevel().toString(),
-                          aIncident.getIncidentDate().value(), user);
+                aIncident.getSecurityLevel().toString(),
+                aIncident.getIncidentDate().value(), user);
     }
 
     public static Incident createDomain(Report aReport) {
