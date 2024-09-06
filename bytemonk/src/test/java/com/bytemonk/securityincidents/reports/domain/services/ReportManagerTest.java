@@ -53,7 +53,7 @@ public class ReportManagerTest {
         var aTitle = "Penguim just stole a password";
         var aDescriptionString = "One user left his browser open. What becomes a breach for the Penguim.";
 
-        repository.save(Incident.create(aTitle, aDescriptionString, DateFactory.now(), ESecurityLevel.LOW), anUser);
+        repository.saveIncident(Incident.create(aTitle, aDescriptionString, DateFactory.now(), ESecurityLevel.LOW), anUser);
 
         aDescriptionString = "The Penguim gather with Charede and broke a user account";
 
