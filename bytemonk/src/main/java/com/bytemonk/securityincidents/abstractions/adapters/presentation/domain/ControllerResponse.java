@@ -15,7 +15,7 @@ public class ControllerResponse<T> {
 
     private ControllerResponse(String Message) {
         this.Message = Message;
-        this.Response = new ArrayList<>();
+        this.Response = new ArrayList<T>();
     }
 
     public static <TResponse> ControllerResponse<TResponse> create(ApplicationResponse<TResponse> anApplicationResponse) {
