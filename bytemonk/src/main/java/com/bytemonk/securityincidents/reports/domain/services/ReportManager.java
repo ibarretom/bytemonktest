@@ -1,8 +1,10 @@
 package com.bytemonk.securityincidents.reports.domain.services;
 
 import com.bytemonk.securityincidents.abstractions.domain.exceptions.DomainException;
+import com.bytemonk.securityincidents.abstractions.domain.exceptions.ValidationException;
 import com.bytemonk.securityincidents.reports.IIncidentReportRepository;
 import com.bytemonk.securityincidents.reports.domain.entities.Incident;
+import com.bytemonk.securityincidents.reports.domain.valueobjects.ESecurityLevel;
 import com.bytemonk.securityincidents.users.domain.entities.User;
 import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +46,16 @@ public class ReportManager implements IReportManager {
     @Override
     public List<Incident> findAll(Username anUsername) throws DomainException {
         return List.of();
+    }
+
+    @Override
+    public Incident updateSeverity(long anIncidentId, ESecurityLevel securityLevel, User anUser) throws DomainException {
+        var anUpdatedIncident = incidentReportRepository.updateSeverity(anUser.getUsername(), securityLevel, anIncidentId);
+
+        if (anUpdatedIncident == null) {
+            throw new ValidationException("Incident not found.");
+        }
+
+        return anUpdatedIncident;
     }
 }

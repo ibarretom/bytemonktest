@@ -3,6 +3,7 @@ package com.bytemonk.securityincidents.reports.adapters.persistence.database;
 import com.bytemonk.securityincidents.reports.IIncidentReportRepository;
 import com.bytemonk.securityincidents.reports.adapters.persistence.domain.models.Report;
 import com.bytemonk.securityincidents.reports.domain.entities.Incident;
+import com.bytemonk.securityincidents.reports.domain.valueobjects.ESecurityLevel;
 import com.bytemonk.securityincidents.reports.domain.valueobjects.Title;
 import com.bytemonk.securityincidents.users.domain.entities.User;
 import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
@@ -58,5 +59,12 @@ public class ReportsRepository implements IIncidentReportRepository {
         var aReportList = jpaRepository.findAllIncidents(anUsername.value());
 
         return aReportList.stream().map(Report::createDomain).toList();
+    }
+
+    @Override
+    public Incident updateSeverity(Username anUsername, ESecurityLevel aSeverity, long anIncidentId) {
+        var anUpdatedReport = jpaRepository.updateSeverity(anUsername.value(), aSeverity.toString(), anIncidentId);
+
+        return Report.createDomain(anUpdatedReport);
     }
 }

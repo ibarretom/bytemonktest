@@ -50,4 +50,9 @@ public class IncidentReportRepositoryTest implements IIncidentReportRepository {
         return aReport.map(Report::createDomain).orElse(null);
 
     }
+
+    @Override
+    public List<Incident> findAllIncidents(Username anUsername) {
+        return new ArrayList<Incident>();
+    }
 }
