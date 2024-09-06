@@ -103,7 +103,7 @@ public class ReportControllerIT {
     @Test
     void should_warn_the_correct_error_for_invalid_body() throws Exception {
         var aJSONBody =
-                "{\"title\": \"Microsoft crash\", \"description\": \"\", \"severityLevel\": \"HIGH\", \"incidentDate\": \"" + DateFactory.now().toString() + "\"}";
+                "{\"title\": \"Microsoft crash\", \"description\": \"dwarf\", \"severityLevel\": \"HIGH\", \"incidentDate\": \"" + DateFactory.now().toString() + "\"}";
 
         var authorizationHeader = new HttpHeaders();
         authorizationHeader.add("X-Authorization-Username", "gandalfthegrey");
