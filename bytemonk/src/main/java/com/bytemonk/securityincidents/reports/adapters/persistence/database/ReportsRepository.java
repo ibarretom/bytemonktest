@@ -18,8 +18,8 @@ public class ReportsRepository implements IIncidentReportRepository {
         this.jpaRepository = jpaRepository;
     }
 
-    public Incident findByTitle(Title aTitle, Username username) {
-        var aReport = jpaRepository.findByTitle(aTitle.value(), username.value());
+    public Incident findByTitle(Title aTitle, Username anUsername) {
+        var aReport = jpaRepository.findByTitle(aTitle.value(), anUsername.value());
 
         if (aReport == null) {
             return null;
@@ -28,9 +28,9 @@ public class ReportsRepository implements IIncidentReportRepository {
         return Report.createDomain(aReport);
     }
 
-    public Incident saveIncident(Incident aIncident, User user) {
+    public Incident saveIncident(Incident aIncident, User anUser) {
         try {
-            var aSaving = jpaRepository.save(Report.create(aIncident, user));
+            var aSaving = jpaRepository.save(Report.create(aIncident, anUser));
             return Report.createDomain(aSaving);
         }catch(Exception e) {
             return null;

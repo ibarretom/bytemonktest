@@ -18,9 +18,9 @@ public class IncidentReportRepositoryTest implements IIncidentReportRepository {
     }
 
     @Override
-    public Incident findByTitle(Title aTitle, Username username) {
+    public Incident findByTitle(Title aTitle, Username anUsername) {
         var anIncident = reports.stream()
-                .filter(report -> report.getTitle().equals(aTitle.value()) && report.getOwner().equals(username))
+                .filter(report -> report.getTitle().equals(aTitle.value()) && report.getOwner().equals(anUsername))
                 .findFirst();
 
         if (anIncident.isEmpty())
@@ -32,8 +32,8 @@ public class IncidentReportRepositoryTest implements IIncidentReportRepository {
     }
 
     @Override
-    public Incident saveIncident(Incident aIncident, User aUser) {
-        var aReport = Report.create(aIncident, aUser);
+    public Incident saveIncident(Incident aIncident, User anUser) {
+        var aReport = Report.create(aIncident, anUser);
 
         reports.add(aReport);
 
