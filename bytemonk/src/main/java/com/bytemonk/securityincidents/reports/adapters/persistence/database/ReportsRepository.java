@@ -19,10 +19,22 @@ public class ReportsRepository implements IIncidentReportRepository {
     }
 
     public Incident findByTitle(Title aTitle, Username username) {
-        return Report.createDomain(jpaRepository.findByTitle(aTitle.value(), username.value()));
+        var aReport = jpaRepository.findByTitle(aTitle.value(), username.value());
+
+        if (aReport == null) {
+            return null;
+        }
+
+        return Report.createDomain(aReport);
     }
 
     public Incident saveIncident(Incident aIncident, User user) {
-        return Report.createDomain(jpaRepository.save(Report.create(aIncident, user)));
+        try {
+            var aSaving = jpaRepository.save(Report.create(aIncident, user));
+            return Report.createDomain(aSaving);
+        }catch(Exception e) {
+            return null;
+        }
+
     }
 }
