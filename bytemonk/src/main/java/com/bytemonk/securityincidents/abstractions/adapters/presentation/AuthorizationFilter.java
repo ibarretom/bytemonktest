@@ -16,7 +16,7 @@ public class AuthorizationFilter implements Filter {
     private final IUserRepository anUserRepository;
 
     @Autowired
-    AuthorizationFilter(IUserRepository anUserRepository) {
+    public AuthorizationFilter(IUserRepository anUserRepository) {
         this.anUserRepository = anUserRepository;
     }
 
