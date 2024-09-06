@@ -13,7 +13,7 @@ public class UserRepository implements IUserRepository {
     private final JpaAccessRepository jpaAccessRepository;
 
     @Autowired
-    private UserRepository(JpaAccessRepository jpaAccessRepository) {
+    public UserRepository(JpaAccessRepository jpaAccessRepository) {
         this.jpaAccessRepository = jpaAccessRepository;
     }
 
