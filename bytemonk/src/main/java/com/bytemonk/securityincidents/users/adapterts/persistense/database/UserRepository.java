@@ -19,6 +19,11 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public User findByUsername(Username username) {
-        return UserModel.createDomain(jpaAccessRepository.findByUsername(username.value()));
+        var anUser = jpaAccessRepository.findByUsername(username.value());
+
+        if (anUser == null)
+            return null;
+
+        return UserModel.createDomain(anUser);
     }
 }
