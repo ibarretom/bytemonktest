@@ -11,6 +11,7 @@ import com.bytemonk.securityincidents.reports.application.services.usecases.Crea
 import com.bytemonk.securityincidents.users.domain.entities.User;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value="/report")
+@RequestMapping(value="/report", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ReportController {
 
     private CreateReportUseCase aCreateReportUseCase;
@@ -28,15 +29,17 @@ public class ReportController {
         this.aCreateReportUseCase = createReportUseCase;
     }
     @PostMapping("")
-    public ResponseEntity<ControllerResponse<CreatedReportResponse>> saveReport(HttpServletRequest request,
+    public ResponseEntity<CreatedReportResponse> saveReport(HttpServletRequest request,
                                                             @RequestBody CreateIncidentReportRequest aIncidentReport) {
         var anUser = (User) request.getAttribute("authenticatedUser");
 
         var anApplicationResponse = (ApplicationResponse<CreatedReportResponse>) aCreateReportUseCase
                 .execute(new CreateReportUseCaseRequest(anUser, aIncidentReport), EOperationCode.CREATED);
 
+        var aBody = ControllerResponse.create(anApplicationResponse);
+
         return ResponseEntity
-                    .status(anApplicationResponse.getHttpStatusFromCode())
-                    .body(ControllerResponse.create(anApplicationResponse));
+                .status(anApplicationResponse.getHttpStatusFromCode())
+                .body(anApplicationResponse.getResult());
     }
 }
