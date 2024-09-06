@@ -13,12 +13,12 @@ public class ReportManager implements IReportManager {
     }
 
     public Incident warnSecurityBreach(Incident aIncident, User user) throws DomainException {
-        var aFetchedIncident = incidentReportRepository.findBy(aIncident.getTitle(), user.getUsername());
+        var aFetchedIncident = incidentReportRepository.findByTitle(aIncident.getTitle(), user.getUsername());
 
         if (aFetchedIncident != null) {
             throw new DomainException("Report already made.");
         }
 
-        return incidentReportRepository.save(aIncident, user);
+        return incidentReportRepository.saveIncident(aIncident, user);
     }
 }

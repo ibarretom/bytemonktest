@@ -18,7 +18,7 @@ public class IncidentReportRepositoryTest implements IIncidentReportRepository {
     }
 
     @Override
-    public Incident findBy(Title aTitle, Username username) {
+    public Incident findByTitle(Title aTitle, Username username) {
         var anIncident = reports.stream()
                 .filter(report -> report.getTitle().equals(aTitle.value()) && report.getOwner().equals(username))
                 .findFirst();
