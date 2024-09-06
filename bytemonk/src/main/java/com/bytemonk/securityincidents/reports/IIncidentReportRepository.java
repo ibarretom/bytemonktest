@@ -8,4 +8,5 @@ import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
 public interface IIncidentReportRepository {
     Incident findByTitle(Title aTitle, Username anUsername);
     Incident saveIncident(Incident aIncident, User anUser);
+    Incident findByIncidentId(Long id, Username anUsername);
 }

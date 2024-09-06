@@ -37,4 +37,15 @@ public class ReportsRepository implements IIncidentReportRepository {
         }
 
     }
+
+    @Override
+    public Incident findByIncidentId(Long id, Username anUsername) {
+        var aReport = jpaRepository.findByIncidentId(id, anUsername.value());
+
+        if (aReport == null) {
+            return null;
+        }
+
+        return Report.createDomain(aReport);
+    }
 }
