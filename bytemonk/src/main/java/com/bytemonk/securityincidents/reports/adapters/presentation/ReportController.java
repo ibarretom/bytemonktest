@@ -46,8 +46,22 @@ public class ReportController {
                                                                @PathVariable long id) {
         var anUser = (User) request.getAttribute("authenticatedUser");
 
-        var anDomainRequest =new FetchReportByIdRequest(id, anUser);
+        var anDomainRequest = new FetchReportByIdRequest(id, anUser);
         var anApplicationResponse = (ApplicationResponse<FetchReportResponse>) aFetchReportByIdUseCase
+                .execute(anDomainRequest, EOperationCode.FETCHED);
+
+        return ResponseEntity
+                .status(anApplicationResponse.getHttpStatusFromCode())
+                .body(anApplicationResponse.getResult());
+    }
+
+    @GetMapping("")
+    public ResponseEntity<List<CreatedReportResponse>> fetchAllReports(HttpServletRequest request) {
+        var anUser = (User) request.getAttribute("authenticatedUser");
+
+        var anDomainRequest = new FetchAllRequestUseCase(anUser);
+
+        var anApplicationResponse = (ApplicationResponse<List<CreatedReportResponse>>) aFetchReportByIdUseCase
                 .execute(anDomainRequest, EOperationCode.FETCHED);
 
         return ResponseEntity

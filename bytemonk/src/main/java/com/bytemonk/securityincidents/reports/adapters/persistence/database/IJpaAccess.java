@@ -5,10 +5,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface IJpaAccess extends JpaRepository<Report, Long> {
     @Query(value = "SELECT i FROM Report i WHERE i.title = :title and i.user.username = :username")
     Report findByTitle(@Param("title") String aTitle, @Param("username") String anUsername);
 
     @Query(value = "SELECT r FROM Report r WHERE r.id = :id AND r.user.username = :username")
     Report findByIncidentId(@Param("id") Long aId, @Param("username") String anUsername);
+
+    @Query(value = "SELECT r from Report r WHERE r.user.username = :username")
+    List<Report> findAllIncidents(@Param("username") String anUsername);
 }

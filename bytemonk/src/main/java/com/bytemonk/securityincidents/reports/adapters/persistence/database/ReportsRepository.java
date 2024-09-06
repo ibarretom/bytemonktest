@@ -9,6 +9,9 @@ import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Repository
 public class ReportsRepository implements IIncidentReportRepository {
     private IJpaAccess jpaRepository;
@@ -48,5 +51,12 @@ public class ReportsRepository implements IIncidentReportRepository {
         }
 
         return Report.createDomain(aReport);
+    }
+
+    @Override
+    public List<Incident> findAllIncidents(Username anUsername) {
+        var aReportList = jpaRepository.findAllIncidents(anUsername.value());
+
+        return aReportList.stream().map(Report::createDomain).toList();
     }
 }

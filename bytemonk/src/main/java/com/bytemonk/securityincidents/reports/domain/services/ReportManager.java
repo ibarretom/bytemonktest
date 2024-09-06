@@ -40,4 +40,9 @@ public class ReportManager implements IReportManager {
 
         return List.of(anIncident);
     }
+
+    @Override
+    public List<Incident> findAll(Username anUsername) throws DomainException {
+        return List.of();
+    }
 }
