@@ -2,6 +2,9 @@ package com.bytemonk.securityincidents.users.adapterts.persistense.domain.models
 
 
 import com.bytemonk.securityincidents.users.domain.entities.User;
+import com.bytemonk.securityincidents.users.domain.valueobjects.Name;
+import com.bytemonk.securityincidents.users.domain.valueobjects.Password;
+import com.bytemonk.securityincidents.users.domain.valueobjects.Username;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -35,8 +38,12 @@ public class UserModel {
 
     protected UserModel() {}
 
-    public static UserModel create(User aUser) {
-        return new UserModel(aUser.getId(), aUser.getName().firstName(), aUser.getName().lastName(),
-                            aUser.getUsername().value(), aUser.getPassword().value());
+    public static UserModel create(User anUser) {
+        return new UserModel(anUser.getId(), anUser.getName().firstName(), anUser.getName().lastName(),
+                anUser.getUsername().value(), anUser.getPassword().value());
+    }
+
+    public static User createDomain(UserModel anUser) {
+        return User.create(anUser.getId(), new Name(anUser.firstName, anUser.lastName), new Username(anUser.username), new Password(anUser.password));
     }
 }
