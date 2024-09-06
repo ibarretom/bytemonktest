@@ -32,13 +32,12 @@ public class IncidentReportRepositoryTest implements IIncidentReportRepository {
     }
 
     @Override
-    public Incident save(Incident aIncident, User user) {
-        var aReport = Report.create(aIncident, user);
+    public Incident saveIncident(Incident aIncident, User aUser) {
+        var aReport = Report.create(aIncident, aUser);
 
         reports.add(aReport);
 
         return Report.createDomain(aReport);
-
 
     }
 }
