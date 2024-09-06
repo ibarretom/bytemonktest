@@ -24,6 +24,11 @@ public class AuthorizationFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         var anHttpRequest = (HttpServletRequest) servletRequest;
 
+        if (isPublicRoute(anHttpRequest.getRequestURI())) {
+            filterChain.doFilter(servletRequest, servletResponse);
+            return;
+        }
+
         var anAuthenticatedUser = getUserCredentials(anHttpRequest);
 
         var anHttpResponse = (HttpServletResponse) servletResponse;
@@ -37,6 +42,12 @@ public class AuthorizationFilter implements Filter {
 
         if (anUser == null) {
             anHttpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+
+        if (!anAuthenticatedUser.password().equals(anUser.getPassword().value())) {
+            anHttpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
         }
 
         anHttpRequest.setAttribute("authenticatedUser", anUser);
@@ -54,5 +65,9 @@ public class AuthorizationFilter implements Filter {
         }catch (ValidationException ex) {
             return null;
         }
+    }
+
+    private boolean isPublicRoute(String aRequestURI) {
+        return aRequestURI.startsWith("/h2-console");
     }
 }
